@@ -92,7 +92,7 @@ function UploadResume({ setFile }) {
                 alignItems: "center",
                 justifyContent: "center",
                 gap: "6px",
-                wordBreak: "break-all", // ✨ Prevents massive filenames from breaking mobile UI
+                wordBreak: "break-all",
               }}
             >
               <FiFile size={14} style={{ flexShrink: 0 }} /> {fileName}

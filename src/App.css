@@ -181,7 +181,6 @@ body {
   color: var(--text);
 }
 
-/* APP CONTAINER */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -219,7 +218,6 @@ body {
   box-shadow: var(--shadow-hover);
 }
 
-/* BUTTONS & DROPZONE */
 .action-button {
   width: 100%;
   margin-top: 10px;
@@ -369,12 +367,11 @@ body {
   }
 }
 
-/* ✨ NEW FOOTER STYLES */
 .app-footer {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px 100px; /* 100px bottom padding clears floating nav */
+  padding: 40px 20px 100px;
   border-top: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -418,7 +415,6 @@ body {
   width: 100%;
 }
 
-/* ✨ NEW FLOATING BOTTOM NAV (Like the image) */
 .floating-nav-wrapper {
   position: fixed;
   bottom: 30px;
@@ -427,11 +423,11 @@ body {
   display: flex;
   justify-content: center;
   z-index: 1000;
-  pointer-events: none; /* Allows clicking through the wrapper */
+  pointer-events: none;
 }
 
 .floating-nav {
-  pointer-events: auto; /* Restores clicking on the nav itself */
+  pointer-events: auto;
   background: var(--card);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -462,14 +458,13 @@ body {
   color: var(--accent);
 }
 
-/* RESPONSIVENESS */
 @media (max-width: 768px) {
   .app-header {
     padding: 15px 20px;
   }
 
   .username {
-    display: none; /* Hide username on mobile to save space */
+    display: none;
   }
 
   .app-container {
@@ -492,4 +487,23 @@ body {
   .footer-links {
     justify-content: center;
   }
+}
+.header-right button,
+.header-left img,
+.icon-button,
+.nav-item {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.header-right button:hover,
+.icon-button:hover,
+.nav-item:hover {
+  transform: scale(1.15) rotate(15deg);
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 4px 15px var(--accent-soft);
+}
+
+.header-left img:hover {
+  transform: scale(1.1) rotate(-5deg);
 }

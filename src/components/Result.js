@@ -26,7 +26,6 @@ function Result({ data }) {
         : "📚 Focus on fundamentals to improve.";
 
   const renderLearningPlan = (text) => {
-    // 🔥 FIX: Added a filter to ignore the redundant AI introductory text
     const blocks = text.split(/\n\n|(?=👉|📌)/).filter((b) => {
       const trimmed = b.trim();
       return (

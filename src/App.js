@@ -26,7 +26,6 @@ function App() {
   const [loadingText, setLoadingText] = useState("Analyze Resume");
   const [isDark, setIsDark] = useState(true);
 
-  // Apply theme
   useEffect(() => {
     if (isDark) {
       document.documentElement.setAttribute("data-theme", "dark");
@@ -35,7 +34,6 @@ function App() {
     }
   }, [isDark]);
 
-  // Cycle through loading messages
   useEffect(() => {
     let interval;
     if (loading) {
@@ -90,13 +88,11 @@ function App() {
     <>
       <div className="bg-mesh"></div>
 
-      {/* ✨ UPDATED STICKY HEADER */}
       <header className="app-header">
         <div
           className="header-left"
           style={{ display: "flex", alignItems: "center", gap: "10px" }}
         >
-          {/* REPLACE src with your actual logo path */}
           <img
             src="/Logo.png"
             alt="Logo"
@@ -194,7 +190,6 @@ function App() {
         </div>
       </div>
 
-      {/* FOOTER */}
       <footer className="app-footer">
         <div className="footer-content">
           <div className="footer-left">
@@ -202,7 +197,7 @@ function App() {
               className="header-logo-text text-gradient"
               style={{ fontSize: "1.2rem" }}
             >
-              Skill Agent
+              Skill Assessment Agent
             </span>
           </div>
           <div className="footer-links">
@@ -213,7 +208,7 @@ function App() {
           </div>
         </div>
         <div className="footer-bottom">
-          © 2026 Skill Agent. All rights reserved. Made in India.
+          © 2026 Skill Assessment Agent. All rights reserved. Made in India.
         </div>
       </footer>
     </>
