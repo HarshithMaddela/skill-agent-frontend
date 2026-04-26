@@ -5,10 +5,9 @@ import Result from "./components/Result";
 import axios from "axios";
 import "./App.css";
 
-import { FiSun, FiMoon, FiTarget } from "react-icons/fi";
+import { FiSun, FiMoon } from "react-icons/fi";
 import { BsStars } from "react-icons/bs";
 
-// Fun messages to show while the user is waiting!
 const loadingMessages = [
   "Scanning resume...",
   "Extracting keywords...",
@@ -36,7 +35,7 @@ function App() {
     }
   }, [isDark]);
 
-  // Cycle through loading messages while loading is true
+  // Cycle through loading messages
   useEffect(() => {
     let interval;
     if (loading) {
@@ -45,7 +44,7 @@ function App() {
       interval = setInterval(() => {
         i = (i + 1) % loadingMessages.length;
         setLoadingText(loadingMessages[i]);
-      }, 1200); // Changes text every 1.2 seconds
+      }, 1200);
     } else {
       setLoadingText("Analyze Resume");
     }
@@ -65,16 +64,11 @@ function App() {
     try {
       setLoading(true);
 
-      // 1. Calculate a random delay between 4000ms (4s) and 6000ms (6s)
       const randomDelay = Math.floor(Math.random() * (6000 - 4000 + 1)) + 4000;
-
-      // 2. Create a dummy promise that just waits for that delay
       const delayPromise = new Promise((resolve) =>
         setTimeout(resolve, randomDelay),
       );
 
-      // 3. Run BOTH the API call and the delay at the same time.
-      // It won't move to the next line until BOTH are finished!
       const [res] = await Promise.all([
         axios.post(
           "https://skill-agent-backend-production.up.railway.app/api/analyze-pdf",
@@ -96,15 +90,56 @@ function App() {
     <>
       <div className="bg-mesh"></div>
 
+      {/* ✨ UPDATED STICKY HEADER */}
+      <header className="app-header">
+        <div
+          className="header-left"
+          style={{ display: "flex", alignItems: "center", gap: "10px" }}
+        >
+          {/* REPLACE src with your actual logo path */}
+          <img
+            src="/Logo.png"
+            alt="Logo"
+            style={{ height: "30px", width: "auto", objectFit: "contain" }}
+          />
+          <span className="header-logo-text text-gradient">
+            Skill Assessment Agent
+          </span>
+        </div>
+
+        <div className="header-right">
+          <button
+            onClick={() => setIsDark(!isDark)}
+            style={{
+              background: "var(--card)",
+              border: "1px solid var(--border)",
+              padding: "10px",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              color: "var(--text)",
+              transition: "all 0.3s ease",
+            }}
+            title="Toggle Theme"
+          >
+            {isDark ? <FiSun size={20} /> : <FiMoon size={20} />}
+          </button>
+        </div>
+      </header>
+
       <div className="app-container">
         <div className="content-wrapper">
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "center",
               alignItems: "center",
               width: "100%",
               marginBottom: "30px",
+              flexWrap: "wrap",
+              gap: "16px",
             }}
           >
             <h1
@@ -113,34 +148,21 @@ function App() {
                 display: "flex",
                 alignItems: "center",
                 gap: "12px",
-                fontSize: "2.8rem",
+                fontSize: "clamp(1.8rem, 5vw, 2.8rem)",
                 fontWeight: 700,
                 margin: 0,
+                textAlign: "center",
               }}
             >
-              <FiTarget size={36} color="var(--accent)" />
-              Skill Assessment Agent
+              <BsStars
+                size={36}
+                color="var(--accent)"
+                style={{ flexShrink: 0 }}
+              />
+              AI Resume Analysis
             </h1>
-
-            <button
-              onClick={() => setIsDark(!isDark)}
-              style={{
-                background: "var(--card)",
-                border: "1px solid var(--border)",
-                padding: "10px",
-                borderRadius: "50%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                color: "var(--text)",
-                transition: "all 0.3s ease",
-              }}
-              title="Toggle Theme"
-            >
-              {isDark ? <FiSun size={20} /> : <FiMoon size={20} />}
-            </button>
           </div>
+
           <div className="glass-card">
             <UploadResume setFile={setFile} />
             <JobDescription setJobDescription={setJobDescription} />
@@ -165,13 +187,35 @@ function App() {
             </button>
           </div>
           {result && (
-            <div className="fade-in">
-              {/* ✅ Passed jobDescription here! */}
+            <div className="fade-in" style={{ width: "100%" }}>
               <Result data={result} jobDescription={jobDescription} />
             </div>
           )}
         </div>
       </div>
+
+      {/* FOOTER */}
+      <footer className="app-footer">
+        <div className="footer-content">
+          <div className="footer-left">
+            <span
+              className="header-logo-text text-gradient"
+              style={{ fontSize: "1.2rem" }}
+            >
+              Skill Agent
+            </span>
+          </div>
+          <div className="footer-links">
+            <a href="#about">About Us</a>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+            <a href="#support">Contact Support</a>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          © 2026 Skill Agent. All rights reserved. Made in India.
+        </div>
+      </footer>
     </>
   );
 }

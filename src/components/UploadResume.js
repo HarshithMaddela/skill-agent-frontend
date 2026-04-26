@@ -6,7 +6,6 @@ function UploadResume({ setFile }) {
   const [fileName, setFileName] = useState("");
   const fileInputRef = useRef(null);
 
-  // Handle Drag Events
   const onDragOver = (e) => {
     e.preventDefault();
     setIsDragging(true);
@@ -28,7 +27,6 @@ function UploadResume({ setFile }) {
     }
   };
 
-  // Handle Click Event (opens file browser)
   const onFileChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       handleFile(e.target.files[0]);
@@ -42,12 +40,10 @@ function UploadResume({ setFile }) {
     }
 
     const size = (selectedFile.size / 1024).toFixed(1);
-
     setFileName(`${selectedFile.name} (${size} KB)`);
     setFile(selectedFile);
   };
 
-  // Trigger hidden input click
   const triggerFileInput = () => {
     fileInputRef.current.click();
   };
@@ -78,11 +74,11 @@ function UploadResume({ setFile }) {
           accept=".pdf"
           ref={fileInputRef}
           onChange={onFileChange}
-          style={{ display: "none" }} // Hide the native input!
+          style={{ display: "none" }}
         />
 
         {fileName ? (
-          <div className="file-selected-view">
+          <div className="file-selected-view" style={{ textAlign: "center" }}>
             <FiCheckCircle
               size={32}
               color="var(--accent)"
@@ -91,14 +87,20 @@ function UploadResume({ setFile }) {
             <p className="primary-text">File Uploaded Successfully</p>
             <p
               className="secondary-text"
-              style={{ display: "flex", alignItems: "center", gap: "6px" }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "6px",
+                wordBreak: "break-all", // ✨ Prevents massive filenames from breaking mobile UI
+              }}
             >
-              <FiFile size={14} /> {fileName}
+              <FiFile size={14} style={{ flexShrink: 0 }} /> {fileName}
             </p>
             <p className="click-to-change">(Click or drag to change file)</p>
           </div>
         ) : (
-          <div className="empty-upload-view">
+          <div className="empty-upload-view" style={{ textAlign: "center" }}>
             <FiUploadCloud size={38} className="upload-icon" />
             <p className="primary-text">
               <span className="text-gradient">Click to upload</span> or drag and
